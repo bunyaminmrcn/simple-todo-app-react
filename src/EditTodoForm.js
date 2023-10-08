@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { TodosContext } from './context/todos.context';
 
 function EditTodoForm({ id, task, toggleEditForm }) {
-  const { editTodo } = useContext(TodosContext);
+  const { dispatch } = useContext(TodosContext);
   
   const [value, handleChange, reset] = useInputState(task);
   console.log("Edit from Render!");
@@ -12,7 +12,7 @@ function EditTodoForm({ id, task, toggleEditForm }) {
     <form
       onSubmit={e => {
         e.preventDefault();
-        editTodo(id, value);
+        dispatch({ type: "EDIT", id: id, newTask: value });
         reset();
         toggleEditForm();
       }}
